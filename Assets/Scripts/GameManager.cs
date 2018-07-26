@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private MapSettings settings;
 
+    [SerializeField]
+    private MeshSettings meshSettings;
+
     private GameObject map;
     private Renderer mapRenderer;
 
@@ -17,7 +20,7 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     private void Start ()
     {
-        map = mapGenerator.CreateMap(settings, out mapRenderer);
+        map = mapGenerator.CreateMap(settings, meshSettings, out mapRenderer);
         mapGrid = new NodeGrid(mapGenerator.CreateNodeMap(settings), settings.width, settings.height);
     }
 	

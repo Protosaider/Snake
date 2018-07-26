@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapGenerator
 {
-    public GameObject CreateMap(MapSettings settings, out Renderer renderer)
+    public GameObject CreateMap(MapSettings settings, MeshSettings meshSettings, out Renderer renderer)
     {
         GameObject map = new GameObject("Tile Map");
 
@@ -15,7 +15,7 @@ public class MapGenerator
         MeshFilter filter = map.AddComponent<MeshFilter>();
 
         //filter.sharedMesh = mesh;
-        filter.sharedMesh = DiscreteMeshGenerator.GenerateGridMesh(settings);
+        filter.sharedMesh = DiscreteMeshGenerator.GenerateGridMesh(settings, meshSettings);
 
         renderer = map.AddComponent<MeshRenderer>();
         renderer.sharedMaterial = new Material(Shader.Find("Unlit/Texture"))

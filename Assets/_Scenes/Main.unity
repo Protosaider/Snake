@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311926, g: 0.38074008, b: 0.35872707, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 18b3418784c46e945835dd9ce84c2737, type: 2}
+  meshSettings: {fileID: 11400000, guid: 55b3d9a0437bbc24394bb9c965e10333, type: 2}
 --- !u!1 &1684612514
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +200,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1684612515
 Transform:
   m_ObjectHideFlags: 0
@@ -224,8 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ddfee6bfaef6864fa73ca66281f088a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputManager: {fileID: 114456106334306808, guid: 3ca04fd8e632dbd42944c0083ff49af7,
-    type: 2}
 --- !u!114 &1684612517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +277,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.89705884, g: 0.8810464, b: 0.316609, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -289,7 +288,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -333,7 +332,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1964174127
 Light:
   m_ObjectHideFlags: 0

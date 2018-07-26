@@ -4,19 +4,19 @@ using UnityEngine;
 
 public static class DiscreteMeshGenerator
 {
-    public static Mesh GenerateGridMesh(MapSettings settings)
+    public static Mesh GenerateGridMesh(MapSettings settings, MeshSettings meshSettings)
     {
         Mesh mesh = new Mesh();
 
         Vector2 bottomLeft;
 
-        if (settings.isCentered)
+        if (meshSettings.isCentered)
         {
-            bottomLeft = new Vector2(-settings.width, -settings.height) * settings.cellScale * 0.5f + new Vector2(settings.mapOffsetX, -settings.mapOffsetZ);
+            bottomLeft = new Vector2(-settings.width, -settings.height) * meshSettings.cellScale * 0.5f + new Vector2(meshSettings.mapOffsetX, -meshSettings.mapOffsetZ);
         }
         else
         {
-            bottomLeft = new Vector2(settings.mapOffsetX, -settings.mapOffsetZ);
+            bottomLeft = new Vector2(meshSettings.mapOffsetX, -meshSettings.mapOffsetZ);
         }
 
         Vector3[] vertices = new Vector3[settings.width * settings.height * 4];
@@ -24,7 +24,7 @@ public static class DiscreteMeshGenerator
         int[] triangles = new int[settings.width * settings.height * 6]; //6 = 2 triangles * 3 vertices
         Color[] colors = new Color[vertices.Length];
 
-        float vertexOffset = settings.cellScale;
+        float vertexOffset = meshSettings.cellScale;
 
         int vert = 0;
         int tri = 0;
@@ -33,7 +33,7 @@ public static class DiscreteMeshGenerator
         {
             for (int x = 0; x < settings.width; x++)
             {
-                Vector3 cellOffset = new Vector3(x * settings.cellScale, 0.0f, y * settings.cellScale) + new Vector3(bottomLeft.x, 0.0f, bottomLeft.y);
+                Vector3 cellOffset = new Vector3(x * meshSettings.cellScale, 0.0f, y * meshSettings.cellScale) + new Vector3(bottomLeft.x, 0.0f, bottomLeft.y);
 
                 vertices[vert] = cellOffset;                                                        //bottom left
                 vertices[vert + 1] = new Vector3(vertexOffset, 0.0f, 0.0f) + cellOffset;            //bottom right 
