@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapGenerator
 {
-    public GameObject CreateMap(MapSettings settings, MeshSettings meshSettings, out Renderer renderer)
+    public GameObject CreateMap(MapSettings settings, MeshSettings meshSettings)
     {
         GameObject map = new GameObject("Tile Map");
 
@@ -17,7 +17,7 @@ public class MapGenerator
         //filter.sharedMesh = mesh;
         filter.sharedMesh = DiscreteMeshGenerator.GenerateGridMesh(settings, meshSettings);
 
-        renderer = map.AddComponent<MeshRenderer>();
+        Renderer renderer = map.AddComponent<MeshRenderer>();
         renderer.sharedMaterial = new Material(Shader.Find("Unlit/Texture"))
         {
             mainTexture = GenerateMapTexture(settings)
@@ -25,23 +25,6 @@ public class MapGenerator
         //renderer.transform.localScale = new Vector3(settings.width, 1.0f, settings.height) / settings.cellScale;
 
         return map;
-    }
-
-    public Node[,] CreateNodeMap(MapSettings settings)
-    {
-        //Node[] nodeMap = new Node[settings.width * settings.height];
-        Node[,] nodeMap = new Node[settings.width, settings.height];
-
-        for (int z = 0; z < settings.height; z++)
-        {
-            for (int x = 0; x < settings.width; x++)
-            {
-                //nodeMap[x + z * settings.width] = new Node() { x = x, z = z, pos = Vector3.zero };
-                nodeMap[x, z] = new Node(x, z, Vector3.zero);
-            }
-        }
-
-        return nodeMap;
     }
 
     private Texture2D GenerateMapTexture(MapSettings settings)
