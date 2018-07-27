@@ -6,11 +6,6 @@ public class ObjectSpawner : MonoBehaviour
 {
     NodeGrid grid;
 
-    private void Start()
-    {
-        //add map
-    }
-
     public void SetNodeGrid(NodeGrid grid)
     {
         this.grid = grid;
