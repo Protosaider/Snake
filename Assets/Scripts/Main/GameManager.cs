@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour {
     private MapGenerator mapGenerator = new MapGenerator();
     private NodeGridGenerator nodeGenerator = new NodeGridGenerator();
 
+    private CameraControl cameraControl;
+
     [SerializeField]
     private MapSettings settings;
     [SerializeField]
@@ -22,10 +24,18 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     private void Start ()
     {
+        cameraControl = FindObjectOfType<CameraControl>();
+
         CreateMapRenderer();
         CreateNodeMap();
 
         CreateSpawner();
+
+        Debug.Log(mapGrid.values[0, 0].pos);
+
+        Debug.Log(mapGrid.values[mapGrid.width - 1, mapGrid.height - 1].pos);
+
+        cameraControl.SetPositionAndSize(mapGrid.values[0, 0].pos, mapGrid.values[mapGrid.width - 1, mapGrid.height - 1].pos);
 
         Debug.Log("Default Vector3 = " + default(Vector3) + " default quaternion = " + default(Quaternion));
     }

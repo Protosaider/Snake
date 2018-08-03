@@ -12,11 +12,7 @@ MonoBehaviour:
   m_Name: New Map Settings
   m_EditorClassIdentifier: 
   width: 17
-  height: 15
-  cellScale: 1
-  isCentered: 1
-  mapOffsetX: 0
-  mapOffsetZ: 0
+  height: 70
   tilesColors:
   - {r: 0.05882353, g: 0.84313726, b: 0.19607843, a: 0}
   - {r: 0.11764706, g: 0.9019608, b: 0.25490198, a: 0}
