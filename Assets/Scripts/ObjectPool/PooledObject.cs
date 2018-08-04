@@ -13,12 +13,13 @@ namespace CustomObjectPooling
         [SerializeField]
         private int initialPoolSize = 100;
         public int InitialPoolSize { get { return initialPoolSize; } }
-        public bool hasInitialEnlarge = true;
 
         public int enlargeBy = 10;
         public bool canEnlarge = true;
 
         public bool useDontDestroyOnLoad = false;
+
+        public bool setAsPoolChild = true;
         #endregion
 
         public event System.Action OnGetEvent;

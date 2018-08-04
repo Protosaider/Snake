@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapGenerator
 {
-    public GameObject CreateMap(MapSettings settings, MeshSettings meshSettings)
+    public GameObject CreateMap(MapSettings settings, MeshSettings meshSettings, Transform parent = null)
     {
         GameObject map = new GameObject("Tile Map");
 

@@ -14,7 +14,6 @@ namespace CustomObjectPooling
 
         //private List<PooledObject> disabledObjects = null;
 
-
 #if UNITY_EDITOR
         public List<PooledObject> listShowPool;
 
@@ -24,10 +23,9 @@ namespace CustomObjectPooling
         }
 #endif
 
-
         private ObjectPool() { }
 
-        public static ObjectPool GetPool(PooledObject prefab)
+        public static ObjectPool GetPool(PooledObject prefab, bool setPoolAsChild = false)
         {
             if (pools.ContainsKey(prefab))
                 return pools[prefab];
@@ -40,10 +38,7 @@ namespace CustomObjectPooling
 
             pool.prefab = prefab;
 
-            if (prefab.hasInitialEnlarge)
-            {
-                pool.EnlargePool(prefab.InitialPoolSize);
-            }
+            pool.EnlargePool(prefab.InitialPoolSize);
 
             if (prefab.useDontDestroyOnLoad)
             {
@@ -51,7 +46,7 @@ namespace CustomObjectPooling
             }
 
             //pool.disabledObjects = new List<PooledObject>();       
-
+            
             pools.Add(prefab, pool);
             return pool;
         }
@@ -89,17 +84,25 @@ namespace CustomObjectPooling
             //return pooledObject as T;
         }
 
-        public void EnlargePool(int additionalCapacity)
+        private void EnlargePool(int additionalCapacity)
         {
             for (int i = 0; i < additionalCapacity; i++)
             {
                 var pooledObject = Instantiate(this.prefab) as PooledObject;
                 (pooledObject as Component).gameObject.name += " " + i;
 
+                //! on enable
+                //pooledObject.OnGetEvent += () => GetObjectFromPool(pooledObject);
+
                 //pooledObject.OnReturnEvent += () => AddObjectToAvailable(pooledObject);
                 pooledObject.OnReturnEvent += () => ReturnObjectToPool(pooledObject);
 
-                (pooledObject as Component).gameObject.SetActive(false);               
+                (pooledObject as Component).gameObject.SetActive(false);
+                //! test
+                if (this.prefab.setAsPoolChild)
+                {
+                    (pooledObject as Component).gameObject.transform.SetParent(this.gameObject.transform);
+                }
             }
 
 #if UNITY_EDITOR
@@ -107,21 +110,38 @@ namespace CustomObjectPooling
 #endif
         }
 
+        private void GetObjectFromPool(PooledObject pooledObject)
+        {
+            //if (prefab.setAsPoolChild)
+            //{
+            //    (pooledObject as Component).gameObject.transform.SetParent(gameObject.transform);
+            //}
+        }
+
         private void ReturnObjectToPool(PooledObject pooledObject)
         {
             //disabledObjects.Add(pooledObject);
             objects.Enqueue(pooledObject);
+
+            //pooledObject.transform
+
+            //! not workings because (written below)
+            //if (prefab.setAsPoolChild)
+            //{
+            //    (pooledObject as Component).gameObject.transform.SetParent(gameObject.transform);
+            //}
 
 #if UNITY_EDITOR
             RenewShowList();
 #endif
         }
 
+        //! It's Unity: you cannot parent object if this object is disabled in the same frame.
+
         //private void Update()
         //{
         //    MakeDisabledObjectsChildren();           
         //}
-
         //private void MakeDisabledObjectsChildren()
         //{
         //    if (disabledObjects.Count > 0)

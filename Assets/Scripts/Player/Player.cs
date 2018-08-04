@@ -4,37 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    public PlayerSettings settings;
+    public PlayerMovement movement;
+    public PlayerSpawner spawner;
 
-    public GameObject head;
-    public GameObject body;
-    public GameObject connection;
-
-    // Use this for initialization
-    void Start ()
+    public void Initialize()
     {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-		
-	}
-    
-    private void Initialize()
-    {
-        ObjectSpawner spawner = new ObjectSpawner();
-        spawner.SpawnObjectFromNode(head, settings.spawnX, settings.spawnZ);
-    }
-
-    public void SpawnHead(int x, int z)
-    {
-
-    }
-
-    public void ChangeSnakeSize()
-    {
-
+        //movement = FindObjectOfType<PlayerMovement>();
+        movement.Initialize();
     }
 }
+

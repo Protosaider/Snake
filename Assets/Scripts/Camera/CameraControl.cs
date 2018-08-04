@@ -59,22 +59,23 @@ public class CameraControl : MonoBehaviour {
         // Otherwise, find the position of the target in the camera's local space.
         Vector3 localPos = transform.InverseTransformPoint(bottomLeft);
         // Find the position of the target from the desired position of the camera's local space.
-        Vector3 centerToTarget = localPos - center;
-        // Choose the largest out of the current size and the distance of the tank 'up' or 'down' from the camera.
-        size = Mathf.Max(size, Mathf.Abs(centerToTarget.z));
-        // Choose the largest out of the current size and the calculated size based on the tank being to the left or right of the camera.
-        size = Mathf.Max(size, Mathf.Abs(centerToTarget.x) / m_Camera.aspect);
+        Vector3 centerToTargetDistance = localPos - center;
+
+        // Vertical
+        size = Mathf.Max(size, Mathf.Abs(centerToTargetDistance.z));
+        // Horizontal
+        size = Mathf.Max(size, Mathf.Abs(centerToTargetDistance.x) / m_Camera.aspect);
 
         Debug.Log("Local 1 " + localPos);
-        Debug.Log("CentToTarg 1 " + centerToTarget);
+        Debug.Log("CentToTarg 1 " + centerToTargetDistance);
 
         localPos = transform.InverseTransformPoint(upperRight);
-        centerToTarget = localPos - center;
-        size = Mathf.Max(size, Mathf.Abs(centerToTarget.z));
-        size = Mathf.Max(size, Mathf.Abs(centerToTarget.x) / m_Camera.aspect);
+        centerToTargetDistance = localPos - center;
+        size = Mathf.Max(size, Mathf.Abs(centerToTargetDistance.z));
+        size = Mathf.Max(size, Mathf.Abs(centerToTargetDistance.x) / m_Camera.aspect);
 
         Debug.Log("Local 2 " + localPos);
-        Debug.Log("CentToTarg 2 " + centerToTarget);
+        Debug.Log("CentToTarg 2 " + centerToTargetDistance);
         Debug.Log("Size " + size);
 
         // Add the edge buffer to the size.
